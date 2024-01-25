@@ -7,9 +7,15 @@ import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
   id: z.string(),
-  customerId: z.string(),
-  amount: z.coerce.number(),
-  status: z.enum(['pending', 'paid']),
+  customerId: z.string({
+    invalid_type_error: 'please select a customer.',
+  }),
+  amount: z.coerce
+    .number()
+    .gt(0, { message: 'please enter a number greater than $0.' }),
+  status: z.enum(['pending', 'paid'], {
+    invalid_type_error: ' Please select an invoice status.',
+  }),
   date: z.string(),
 });
 
@@ -66,7 +72,7 @@ export async function updateInvoice(id: string, formData: FormData) {
 }
 
 export async function deleteInvoice(id: string) {
-  throw new Error('Failed to delete Invoice')
+  throw new Error('Failed to delete Invoice');
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
