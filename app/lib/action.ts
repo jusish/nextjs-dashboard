@@ -32,7 +32,7 @@ export type State = {
   message?: string | null;
 };
 
-export async function createInvoice(prevState: State, formData: FormData) {
+export async function createInvoice(_prevState: State, formData: FormData) {
   const { customerId, amount, status } = CreateInvoice.parse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
