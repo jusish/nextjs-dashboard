@@ -8,6 +8,11 @@ import { LatestInvoicesSkeleton, RevenueChartSkeleton } from '../ui/skeletons';
 import CardWrapper from '../ui/dashboard/cards';
 import { CardsSkeleton } from '../ui/skeletons';
 // import { fetchLatestInvoices, fetchCardData } from  './lib/data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
 
 export default async function Page() {
   // const latestInvoices = await fetchLatestInvoices();
